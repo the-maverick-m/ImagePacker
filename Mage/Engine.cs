@@ -85,9 +85,9 @@ namespace Mage
 
         protected override void Initialize()
         {
-            SaveData.Initialize(GetType().Name);
+            SaveData.Initialize(GetType().Name.Replace("Game", ""));
 
-            Window.Title = GetType().Name;
+            Window.Title = GetType().Name.Replace("Game", "");
             Window.ClientSizeChanged += (sender, e) =>
             {
                 if (Window.ClientBounds.Width < 100) _graphics.PreferredBackBufferWidth = 100;
