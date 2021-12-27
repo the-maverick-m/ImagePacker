@@ -1,11 +1,8 @@
-using System;
-using System.Diagnostics;
-using System.IO;
 using Microsoft.Xna.Framework;
 
 namespace Mage
 {
-    public class DesktopRunner
+    public static class DesktopRunner
     {
         public static void Run<T>() where T : Game, new()
         {

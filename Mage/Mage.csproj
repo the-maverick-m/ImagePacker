@@ -2,6 +2,11 @@
     <ItemGroup>
       <ProjectReference Include="..\MonoGame\MonoGame.Framework\MonoGame.Framework.DesktopGL.csproj" />
     </ItemGroup>
+    <ItemGroup>
+        <Content Include="$(MSBuildThisFileDirectory)\Content\**\*.*">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+    </ItemGroup>
     <PropertyGroup>
         <TargetFramework>netstandard2.0</TargetFramework>
         <RootNamespace>Mage</RootNamespace>

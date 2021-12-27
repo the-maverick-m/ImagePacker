@@ -34,15 +34,14 @@ namespace Mage
             keywords.Add(currKeyword);
 
             //Add 2 to get executing location and Content folder
-            string[] finalFullPath = new string[keywords.Count + 3];
+            string[] finalFullPath = new string[keywords.Count + 2];
             finalFullPath[0] = Path.GetDirectoryName(typeof(Resources).Assembly.Location);
             finalFullPath[1] = "Content";
-            finalFullPath[2] = "publish";
 
             for (int i = 0; i < keywords.Count; i++)
             {
                 // Start from offset
-                finalFullPath[i + 3] = keywords[i];
+                finalFullPath[i + 2] = keywords[i];
             }
 
             return Path.Combine(finalFullPath);

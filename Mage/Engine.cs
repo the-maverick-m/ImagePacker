@@ -19,6 +19,7 @@ namespace Mage
         // This is to prevent a scene being drawn before being updated
         private Scene _scene;
         private Scene _queuedScene;
+
         public Scene Scene
         {
             get => _scene;
@@ -27,7 +28,6 @@ namespace Mage
 
         private GraphicsDeviceManager _graphics;
         private Renderer _renderer;
-        private SpriteBatch _spriteBatch;
 
         private const float TargetAspectRatio = 16f / 9f;
         public Rectangle TargetBounds { get; private set; }
@@ -68,18 +68,18 @@ namespace Mage
             // Window is too narrow
             else if (GraphicsDevice.Viewport.AspectRatio < TargetAspectRatio)
             {
-                int finalHeight = (int)(GraphicsDevice.Viewport.Width / TargetAspectRatio);
-                Border = new Point(0, (int)((GraphicsDevice.Viewport.Height / 2) - (finalHeight / 2)));
-                TargetBounds = new Rectangle(0, (int)Border.Y,
-                 GraphicsDevice.Viewport.Width, finalHeight);
+                int finalHeight = (int) (GraphicsDevice.Viewport.Width / TargetAspectRatio);
+                Border = new Point(0, (int) ((GraphicsDevice.Viewport.Height / 2) - (finalHeight / 2)));
+                TargetBounds = new Rectangle(0, (int) Border.Y,
+                    GraphicsDevice.Viewport.Width, finalHeight);
             }
             // Window is too wide
             else
             {
-                int finalWidth = (int)(GraphicsDevice.Viewport.Height * TargetAspectRatio);
-                Border = new Point((int)((GraphicsDevice.Viewport.Width / 2) - (finalWidth / 2)), 0);
-                TargetBounds = new Rectangle((int)Border.X, 0,
-                 finalWidth, GraphicsDevice.Viewport.Height);
+                int finalWidth = (int) (GraphicsDevice.Viewport.Height * TargetAspectRatio);
+                Border = new Point((int) ((GraphicsDevice.Viewport.Width / 2) - (finalWidth / 2)), 0);
+                TargetBounds = new Rectangle((int) Border.X, 0,
+                    finalWidth, GraphicsDevice.Viewport.Height);
             }
         }
 
@@ -96,21 +96,25 @@ namespace Mage
 
                 CalculateTargetBounds();
             };
+            Input.Initialize(this);
 
+            base.Initialize();
+        }
+
+        protected override void LoadContent()
+        {
             GraphicsDevice.DiscardColor = Color.Transparent;
             CalculateTargetBounds();
 
             Graphics.Initialize(GraphicsDevice);
-            Input.Initialize(this);
 
             // extra parameters are same as default except for preserving contents
             RenderTarget = new RenderTarget2D(GraphicsDevice, 1920, 1080, false,
-             SurfaceFormat.Color, DepthFormat.None, 0, RenderTargetUsage.PreserveContents);
+                SurfaceFormat.Color, DepthFormat.None, 0, RenderTargetUsage.PreserveContents);
 
             _renderer = new Renderer(this);
-            _spriteBatch = new SpriteBatch(GraphicsDevice);
-
-            base.Initialize();
+            
+            base.LoadContent();
         }
 
         protected override void Update(GameTime gameTime)
@@ -123,9 +127,10 @@ namespace Mage
                 GC.Collect();
                 _queuedScene.Load();
             }
+
             if (Keyboard.GetState().IsKeyDown(Keys.Escape)) Exit();
 
-            float delta = (float)gameTime.ElapsedGameTime.TotalSeconds;
+            float delta = (float) gameTime.ElapsedGameTime.TotalSeconds;
             Input.Poll();
             Scene?.Update(delta);
 
@@ -141,9 +146,9 @@ namespace Mage
             Scene?.Draw(_renderer);
             GraphicsDevice.SetRenderTarget(null);
 
-            _spriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.PointClamp);
-            _spriteBatch.Draw(RenderTarget, TargetBounds, null, Color.White);
-            _spriteBatch.End();
+            _renderer.SpriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.PointClamp);
+            _renderer.SpriteBatch.Draw(RenderTarget, TargetBounds, null, Color.White);
+            _renderer.SpriteBatch.End();
 
             base.Draw(gameTime);
         }
