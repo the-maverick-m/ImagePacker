@@ -18,6 +18,6 @@
         <EmbeddedResource Include="Icon.bmp" />
     </ItemGroup>
     <ItemGroup>
-      <ProjectReference Include="..\MageProject\MageProject.csproj" />
+      <ProjectReference Include="..\ImagePacker\ImagePacker.csproj" />
     </ItemGroup>
 </Project>

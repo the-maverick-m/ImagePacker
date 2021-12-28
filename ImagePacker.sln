@@ -2,9 +2,9 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mage", "Mage\Mage.csproj", "{98C3194F-F11A-410B-BAF6-A999B5983038}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MageProject", "MageProject\MageProject.csproj", "{E91E018D-0B68-4D72-8E29-3CEA8FDF48A7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImagePacker", "ImagePacker\ImagePacker.csproj", "{E91E018D-0B68-4D72-8E29-3CEA8FDF48A7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MageProject.Desktop", "MageProject.Desktop\MageProject.Desktop.csproj", "{B17569E7-922A-420F-BCDA-8E5EB37F3002}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImagePacker.Desktop", "ImagePacker.Desktop\ImagePacker.Desktop.csproj", "{B17569E7-922A-420F-BCDA-8E5EB37F3002}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
